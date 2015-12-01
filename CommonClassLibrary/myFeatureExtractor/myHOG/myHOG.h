@@ -12,11 +12,11 @@ class myHOG : myExtractorBase {
 public:
     class Feature : protected myFeatureBase {
     public:
-        static const int HOG_NONE_NORMALIZATION = 10;
-        static const int HOG_WITH_L1_NORM       = 11;
-        static const int HOG_WITH_L1_SQRT       = 12;
-        static const int HOG_WITH_L2_NORM       = 13;
-        static const int HOG_WITH_L2_SQRT       = 14;
+        static const int HOG_WITHOUT_NORM = 10;
+        static const int HOG_WITH_L1_NORM = 11;
+        static const int HOG_WITH_L1_SQRT = 12;
+        static const int HOG_WITH_L2_NORM = 13;
+        static const int HOG_WITH_L2_SQRT = 14;
     };
 
 private:

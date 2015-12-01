@@ -19,7 +19,7 @@ void myHOG::Init(void) {
 void myHOG::Normalize(std::vector<float>& vfFeature) const {
     float fNormFactor = 0.0f;
     switch (m_iType) {
-    case myHOG::Feature::HOG_NONE_NORMALIZATION:
+    case myHOG::Feature::HOG_WITHOUT_NORM:
         break;
     case myHOG::Feature::HOG_WITH_L2_NORM:
         for (auto fFeature : vfFeature) {
@@ -47,7 +47,7 @@ void myHOG::Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) con
         }
     }
 
-    if (m_iType != myHOG::Feature::HOG_NONE_NORMALIZATION) {
+    if (m_iType != myHOG::Feature::HOG_WITHOUT_NORM) {
         myHOG::Normalize(vfHogFeature);
     }
 }

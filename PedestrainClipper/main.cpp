@@ -21,7 +21,7 @@ int main(void) {
     */
     
     tinyxml2::XMLDocument oXML;
-    int i = sRootPath.length();
+    int i = static_cast<int>(sRootPath.length());
     string sXMLFileName = sRootPath + sRootPath.substr(sRootPath.length() - 3, 2) + ".xml";
     if (oXML.LoadFile(sXMLFileName.c_str()) != XMLError::XML_NO_ERROR) {
         cout << "XML File" << endl;

@@ -29,10 +29,10 @@ int main(void) {
         std::cout << "\r" << oPositiveReader.getSequenceNumberString();
         myFeatureExtractor oExtractor(mPositiveSample, BlockSize);
         if (bHOG) {
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
         }
         if (bLBP) {
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
         }
         vector<vector<float>> vvfHOGFeature;
         
@@ -44,7 +44,7 @@ int main(void) {
             }
         }
 
-        cv::Mat mSample(1, vvfHOGFeature.size() * vvfHOGFeature.at(0).size(), CV_32FC1);
+        cv::Mat mSample(1, static_cast<int>(vvfHOGFeature.size() * vvfHOGFeature.at(0).size()), CV_32FC1);
         int i = 0;
         for (const auto& vfHOGFeature : vvfHOGFeature) {
             for (const auto fFeature : vfHOGFeature) {
@@ -75,10 +75,10 @@ int main(void) {
     while (oNegativeReader >> mNegativeSample) {
         myFeatureExtractor oExtractor(mNegativeSample, BlockSize);
         if (bHOG) {
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
         }
         if (bLBP) {
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
         }
 
         vector<vector<float>> vvfHOGFeature;
@@ -90,7 +90,7 @@ int main(void) {
             }
         }
 
-        cv::Mat mSample(1, vvfHOGFeature.size() * vvfHOGFeature.at(0).size(), CV_32FC1);
+        cv::Mat mSample(1, static_cast<int>(vvfHOGFeature.size() * vvfHOGFeature.at(0).size()), CV_32FC1);
         int i = 0;
         for (const auto& vfHOGFeature : vvfHOGFeature) {
             for (const auto fFeature : vfHOGFeature) {

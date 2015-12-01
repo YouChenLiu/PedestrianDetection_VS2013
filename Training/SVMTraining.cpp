@@ -16,8 +16,8 @@ int main(void) {
     std::vector<std::vector<float>> vvfPositiveFeatures;
     while (oPositiveReader >> mPositiveSample) {
         myFeatureExtractor oExtractor(mPositiveSample, BlockSize);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
         std::vector<float> vfCascadeFeature;
         for (int y = 0; y < mPositiveSample.rows / BlockSize.height; ++y) {
             for (int x = 0; x < mPositiveSample.cols / BlockSize.width; ++x) {
@@ -43,8 +43,8 @@ int main(void) {
     std::vector<std::vector<float>> vvfNegativeFeatures;
     while (oNegativeReader >> mNegativeSample) {
         myFeatureExtractor oExtractor(mNegativeSample, BlockSize);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
 
         std::vector<float> vfCascadeFeature;
         for (int y = 0; y < mNegativeSample.rows / BlockSize.height; ++y) {

@@ -14,7 +14,7 @@
 
 class myFeatureExtractor {
 public:
-
+    class Features : public myHOG::Feature, public myLBP::Patterns {};
 private:
     cv::Size2i m_BlockSize;
     cv::Mat m_mImage;

@@ -24,8 +24,8 @@ int main(void) {
         std::vector<std::vector<float>> vvfPositiveFeatures;
         while (oPositiveReader >> mPositiveSample) {
             myFeatureExtractor oExtractor(mPositiveSample, BlockSize);
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
-            oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
+            oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
             std::vector<std::vector<float>> vvfHOGFeature;
 
             for (int y = 0; y < mPositiveSample.rows / BlockSize.height; ++y) {
@@ -37,7 +37,7 @@ int main(void) {
             }
 
             int iIndex = 0;
-            cv::Mat mFeature(1, vvfHOGFeature.size() * vvfHOGFeature.at(0).size(), CV_32FC1);
+            cv::Mat mFeature(1, static_cast<int>(vvfHOGFeature.size() * vvfHOGFeature.at(0).size()), CV_32FC1);
             for (const auto& vfHOGFeature : vvfHOGFeature) {
                 for (const auto fFeature : vfHOGFeature) {
                     mFeature.at<float>(0, iIndex) = fFeature;
