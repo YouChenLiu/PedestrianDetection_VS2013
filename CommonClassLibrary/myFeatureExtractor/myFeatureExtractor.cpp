@@ -59,29 +59,28 @@ void myFeatureExtractor::Describe(cv::Point2i Position, std::vector<float>& vfFe
 #   endif
 }
 
-void myFeatureExtractor::EnableFeature(Mode mode) {
+void myFeatureExtractor::EnableFeature(int iFeature) {
     using namespace std;
-    switch (mode) {
-    case Mode::HOG_FEATURE:
+    switch (iFeature) {
+    case myHOG::Feature::HOG_NONE_NORMALIZATION:
         m_poHOG = make_unique<myHOG>(myHOG(m_mImage, m_BlockSize));
         break;
-    case Mode::LBP_8_1:
+    case myLBP::Patterns::LBP_8_1:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_1, m_BlockSize));
         break;
-    case Mode::LBP_FEATURE:
-    case Mode::LBP_8_1_UNIFORM:
+    case myLBP::Patterns::LBP_8_1_UNIFORM:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_1_UNIFORM, m_BlockSize));
         break;
-    case Mode::LBP_8_2:
+    case myLBP::Patterns::LBP_8_2:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_2, m_BlockSize));
         break;
-    case Mode::LBP_8_2_UNIFORM:
+    case myLBP::Patterns::LBP_8_2_UNIFORM:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_2_UNIFORM, m_BlockSize));
         break;
-    case Mode::LBP_16_2:
+    case myLBP::Patterns::LBP_16_2:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_16_2, m_BlockSize));
         break;
-    case Mode::LBP_16_2_UNIFORM:
+    case myLBP::Patterns::LBP_16_2_UNIFORM:
         m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_16_2_UNIFORM, m_BlockSize));
         break;
     default:

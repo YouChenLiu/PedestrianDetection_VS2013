@@ -1,7 +1,5 @@
 #include "myHOG.h"
 
-const float myHOG::m_fUnimportantValue = 1e-6f;
-
 myHOG::myHOG(const cv::Mat& mImage, cv::Size2i blockSize, int iInterval) {
     Init();
     m_mHorizontalGradientImage = mImage * DIPKernel(DIPKernel::Types::SIMPLE_X);
@@ -16,17 +14,14 @@ void myHOG::Init(void) {
     m_mHorizontalGradientImage = m_mVerticalGradientImage = cv::Mat();
     m_iInterval = 0;
     m_BlockSize = cv::Size2i(0, 0);
-    m_NormalizedType = NormalizedTypes::NONE;
 }
 
-void myHOG::Normalize(std::vector<float>& vfFeature, NormalizedTypes type) {
+void myHOG::Normalize(std::vector<float>& vfFeature) const {
     float fNormFactor = 0.0f;
-    switch (type) {
-    case NormalizedTypes::NONE:
+    switch (m_iType) {
+    case myHOG::Feature::HOG_NONE_NORMALIZATION:
         break;
-    case NormalizedTypes::L1_NORM:
-        break;
-    case NormalizedTypes::L2_NORM:
+    case myHOG::Feature::HOG_WITH_L2_NORM:
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature * fFeature;
         }
@@ -52,8 +47,8 @@ void myHOG::Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) con
         }
     }
 
-    if (m_NormalizedType != NormalizedTypes::NONE) {
-        myHOG::Normalize(vfHogFeature, m_NormalizedType);
+    if (m_iType != myHOG::Feature::HOG_NONE_NORMALIZATION) {
+        myHOG::Normalize(vfHogFeature);
     }
 }
 

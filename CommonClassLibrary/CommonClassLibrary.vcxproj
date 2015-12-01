@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myFeatureExtractor\DIPKernel\DIPKernel.h" />
+    <ClInclude Include="myFeatureExtractor\myFeatureBase.h" />
     <ClInclude Include="myFeatureExtractor\myFeatureExtractor.h" />
     <ClInclude Include="myFeatureExtractor\myHOG\myHOG.h" />
     <ClInclude Include="myFeatureExtractor\myLBP\myLBP.h" />

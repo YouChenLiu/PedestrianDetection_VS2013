@@ -6,35 +6,37 @@
 #include <vector>
 #include <opencv2/core/core.hpp>
 #include "../DIPKernel/DIPKernel.h"
+#include "../myFeatureBase.h"
 
-class myHOG {
+class myHOG : myExtractorBase {
 public:
-    enum class NormalizedTypes {
-        NONE = -1,
-        L1_NORM = 0,
-        L1_SQRT,
-        L2_NORM,
-        L2_SQRT
+    class Feature : protected myFeatureBase {
+    public:
+        static const int HOG_NONE_NORMALIZATION = 10;
+        static const int HOG_WITH_L1_NORM       = 11;
+        static const int HOG_WITH_L1_SQRT       = 12;
+        static const int HOG_WITH_L2_NORM       = 13;
+        static const int HOG_WITH_L2_SQRT       = 14;
     };
+
 private:
     cv::Mat m_mHorizontalGradientImage;
     cv::Mat m_mVerticalGradientImage;
     int m_iInterval;
     cv::Size2i m_BlockSize;
-    static const float m_fUnimportantValue;
-    NormalizedTypes m_NormalizedType;
+    int m_iType;
+    const float m_fUnimportantValue = 1e-6f;
 
 public:
     myHOG(const cv::Mat& mImage, cv::Size2i blockSize = cv::Size2i(8, 8), int iInterval = 20);
     ~myHOG(void);
 
     void Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) const;
-    void SetNormalizedType(NormalizedTypes type) { m_NormalizedType = type; }
 
 private:
     void Init(void);
     void DescribeCell(const cv::Point2i Position, std::vector<float>& vfHogFeature) const;
-    void static Normalize(std::vector<float>& vfFeature, NormalizedTypes type);
+    void Normalize(std::vector<float>& vfFeature) const;
 };
 
 #endif

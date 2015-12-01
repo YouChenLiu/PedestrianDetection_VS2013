@@ -124,7 +124,7 @@ void myResultVerifier::TakeOutBoundingBox(tinyxml2::XMLElement* poHeader, std::v
         const std::string s = myXMLLabel::GetTagString(myXMLLabel::Tags::START_POINT);
         XMLElement* Element = poRecord->FirstChildElement(myXMLLabel::GetTagString(myXMLLabel::Tags::START_POINT).c_str());
         const std::string sStartPoint = Element->GetText();
-        const int iCommaIndex = sStartPoint.find(", ");
+        const int iCommaIndex = static_cast<int>(sStartPoint.find(", "));
         const int x = stoi(sStartPoint.substr(0, iCommaIndex));
         const int y = stoi(sStartPoint.substr(iCommaIndex + 1, sStartPoint.size()));
         const int iWidth = std::stoi(poRecord->FirstChildElement(myXMLLabel::GetTagString(myXMLLabel::Tags::WIDTH).c_str())->GetText());
