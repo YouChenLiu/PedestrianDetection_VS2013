@@ -11,3 +11,5 @@ Debug
 *.exe
 *.lib
 *.7z
+*.sbr
+*.bsc
