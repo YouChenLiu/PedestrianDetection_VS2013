@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<params>
+  <stageType>BOOST</stageType>
+  <featureType>HAAR</featureType>
+  <height>128</height>
+  <width>64</width>
+  <stageParams>
+    <boostType>GAB</boostType>
+    <minHitRate>8.0000001192092896e-001</minHitRate>
+    <maxFalseAlarm>6.9999998807907104e-001</maxFalseAlarm>
+    <weightTrimRate>9.4999999999999996e-001</weightTrimRate>
+    <maxDepth>1</maxDepth>
+    <maxWeakCount>20</maxWeakCount></stageParams>
+  <featureParams>
+    <maxCatCount>0</maxCatCount>
+    <featSize>1</featSize>
+    <mode>BASIC</mode></featureParams></params>
+</opencv_storage>

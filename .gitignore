@@ -1,0 +1,13 @@
+*.avi
+*.tlog
+*.db
+*.idb
+*.obj
+Debug
+*.pdb
+*.log
+*.sdf
+*.jpg
+*.exe
+*.lib
+*.7z

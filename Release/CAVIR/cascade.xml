@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<cascade>
+  <stageType>BOOST</stageType>
+  <featureType>HAAR</featureType>
+  <height>128</height>
+  <width>64</width>
+  <stageParams>
+    <boostType>GAB</boostType>
+    <minHitRate>8.0000001192092896e-001</minHitRate>
+    <maxFalseAlarm>6.9999998807907104e-001</maxFalseAlarm>
+    <weightTrimRate>9.4999999999999996e-001</weightTrimRate>
+    <maxDepth>1</maxDepth>
+    <maxWeakCount>20</maxWeakCount></stageParams>
+  <featureParams>
+    <maxCatCount>0</maxCatCount>
+    <featSize>1</featSize>
+    <mode>BASIC</mode></featureParams>
+  <stageNum>1</stageNum>
+  <stages>
+    <!-- stage 0 -->
+    <_>
+      <maxWeakCount>2</maxWeakCount>
+      <stageThreshold>-2.9147228598594666e-001</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 1 3.3376634120941162e-002</internalNodes>
+          <leafValues>
+            -9.5055174827575684e-001 8.5062241554260254e-001</leafValues></_>
+        <_>
+          <internalNodes>
+            0 -1 0 -5.8287106454372406e-002</internalNodes>
+          <leafValues>
+            6.5907949209213257e-001 -9.3001484870910645e-001</leafValues></_></weakClassifiers></_></stages>
+  <features>
+    <_>
+      <rects>
+        <_>
+          1 74 30 31 -1.</_>
+        <_>
+          16 74 15 31 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          40 94 24 15 -1.</_>
+        <_>
+          52 94 12 15 2.</_></rects>
+      <tilted>0</tilted></_></features></cascade>
+</opencv_storage>
