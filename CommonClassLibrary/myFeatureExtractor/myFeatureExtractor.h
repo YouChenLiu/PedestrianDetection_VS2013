@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include "myExtractorBase.h"
 #include "myHOG/myHOG.h"
 #include "myLBP/myLBP.h"
 
@@ -13,12 +14,11 @@
 
 class myFeatureExtractor {
 public:
-    class Features : public myHOG::Feature, public myLBP::Patterns {};
+    class Features : public myHOG::Feature, public myLBP::Feature {};
 private:
     cv::Size2i m_BlockSize;
     cv::Mat m_mImage;
-    std::unique_ptr<myHOG> m_poHOG;
-    std::unique_ptr<myLBP> m_poLBP;
+    std::vector<myExtractorBase*> m_vpoUsedExtractor;
 
 public:
     myFeatureExtractor(cv::Mat& mImage, cv::Size2i BlockSize = cv::Size2i(20, 20));
