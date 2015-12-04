@@ -12,7 +12,7 @@
 
 class myLBP : public myExtractorBase {
 public:
-    class Patterns : protected myFeatureBase {
+    class Feature : protected myFeatureBase {
     public:
         static const int LBP_8_1            = 0;
         static const int LBP_8_2            = 1;
@@ -40,7 +40,7 @@ public:
     myLBP(const cv::Mat& mImage, int Pattern, cv::Size2i blockSize = cv::Size2i(8, 8));
     ~myLBP(void);
 
-    void Describe(cv::Point2i Position, std::vector<float>& vfFeature) const;
+    void Describe(cv::Point2i Position, std::vector<float>& vfFeature) const override;
 
 #ifdef _DEBUG
     void PrintUniformMap(int iLength) const;

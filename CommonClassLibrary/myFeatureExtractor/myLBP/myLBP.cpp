@@ -38,7 +38,7 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+1, +1), Point2i(0, +1), Point2i(-1, +1), Point2i(-1, +0),
     };
     for (auto pt : Location8_1) {
-        m_SamplingPoints.at(Patterns::LBP_8_1).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_8_1).push_back(pt);
     }
 
     std::array<Point2i, 8> Location8_2 = {
@@ -46,7 +46,7 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+2, +2), Point2i(+0, +2), Point2i(-2, +2), Point2i(-2, +0)
     };
     for (auto pt : Location8_2) {
-        m_SamplingPoints.at(Patterns::LBP_8_2).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_8_2).push_back(pt);
     }
 
     std::array<Point2i, 16> Location16_2 = {
@@ -54,7 +54,7 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+2, +2), Point2i(+1, +2), Point2i(+0, +2), Point2i(-1, +2), Point2i(-2, +2), Point2i(-2, +1), Point2i(-2, +0), Point2i(-2, -1)
     };
     for (auto pt : Location16_2) {
-        m_SamplingPoints.at(Patterns::LBP_16_2).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_16_2).push_back(pt);
     }
 }
 
