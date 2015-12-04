@@ -8,7 +8,7 @@
 #include "../DIPKernel/DIPKernel.h"
 #include "../myExtractorBase.h"
 
-class myHOG : myExtractorBase {
+class myHOG : public myExtractorBase {
 public:
     class Feature : protected myFeatureBase {
     public:
@@ -28,10 +28,10 @@ private:
     const float m_fUnimportantValue = 1e-6f;
 
 public:
-    myHOG(const cv::Mat& mImage, cv::Size2i blockSize = cv::Size2i(8, 8), int iInterval = 20);
+    myHOG(const cv::Mat& mImage, int iType, cv::Size2i blockSize = cv::Size2i(8, 8), int iInterval = 20);
     ~myHOG(void);
 
-    void Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) const;
+    void Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) const override;
 
 private:
     void Init(void);

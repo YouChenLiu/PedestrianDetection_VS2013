@@ -1,11 +1,12 @@
 #include "myHOG.h"
 
-myHOG::myHOG(const cv::Mat& mImage, cv::Size2i blockSize, int iInterval) {
+myHOG::myHOG(const cv::Mat& mImage, int iType, cv::Size2i blockSize, int iInterval) {
     Init();
     m_mHorizontalGradientImage = mImage * DIPKernel(DIPKernel::Types::SIMPLE_X);
     m_mVerticalGradientImage = mImage * DIPKernel(DIPKernel::Types::SIMPLE_Y);
     m_BlockSize = blockSize;
     m_iInterval = iInterval;
+    m_iType = iType;
 }
 
 myHOG::~myHOG(void) {}
@@ -25,7 +26,7 @@ void myHOG::Normalize(std::vector<float>& vfFeature) const {
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature * fFeature;
         }
-        fNormFactor = sqrt(fNormFactor + m_fUnimportantValue * m_fUnimportantValue);
+        fNormFactor = cv::sqrt(fNormFactor + m_fUnimportantValue * m_fUnimportantValue);
 
         for (auto& fFeature : vfFeature) {
             fFeature /= fNormFactor;
