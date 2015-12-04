@@ -11,3 +11,6 @@ Debug
 *.exe
 *.lib
 *.7z
+*.sbr
+*.opensdf
+*.bsc
