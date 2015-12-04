@@ -6,7 +6,7 @@
 #include <vector>
 #include <opencv2/core/core.hpp>
 #include "../DIPKernel/DIPKernel.h"
-#include "../myFeatureBase.h"
+#include "../myExtractorBase.h"
 
 class myHOG : myExtractorBase {
 public:

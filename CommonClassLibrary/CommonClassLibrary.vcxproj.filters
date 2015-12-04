@@ -45,7 +45,7 @@
     <ClInclude Include="tinyxml2\tinyxml2.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="myFeatureExtractor\myFeatureBase.h">
+    <ClInclude Include="myFeatureExtractor\myExtractorBase.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

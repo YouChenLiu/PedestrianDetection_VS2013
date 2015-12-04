@@ -1,5 +1,5 @@
-#ifndef _MY_FEATURE_BASE_H_
-#define _MY_FEATURE_BASE_H_
+#ifndef _MY_EXTRACTOR_BASE_H_
+#define _MY_EXTRACTOR_BASE_H_
 
 #include <opencv2/core.hpp>
 

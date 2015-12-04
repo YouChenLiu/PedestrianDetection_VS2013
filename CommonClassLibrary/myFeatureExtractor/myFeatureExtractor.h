@@ -4,7 +4,6 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
-#include "myFeatureBase.h"
 #include "myHOG/myHOG.h"
 #include "myLBP/myLBP.h"
 

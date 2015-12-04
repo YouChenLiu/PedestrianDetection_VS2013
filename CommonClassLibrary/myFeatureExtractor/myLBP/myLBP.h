@@ -4,7 +4,7 @@
 #include <iostream>
 #include <array>
 #include <opencv2/core/core.hpp>
-#include "../myFeatureBase.h"
+#include "../myExtractorBase.h"
 
 #ifdef _DEBUG
 #   include <iomanip>
