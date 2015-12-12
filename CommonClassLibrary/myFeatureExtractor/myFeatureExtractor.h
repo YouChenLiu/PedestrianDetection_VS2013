@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <memory>
-#include "myExtractorBase.h"
 #include "myHOG/myHOG.h"
 #include "myLBP/myLBP.h"
 
