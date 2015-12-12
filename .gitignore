@@ -14,11 +14,3 @@ Debug
 *.sbr
 *.bsc
 *.opensdf
-/CommonClassLibrary/ClassDiagram.cd
-/ComputeFeature/ComputeFeature.vcxproj
-/ComputeFeature/ComputeFeature.vcxproj.filters
-/ComputeFeature/ComputeFeature.vcxproj.user
-/ComputeFeature/Feature.txt
-/ComputeFeature/Source.cpp
-/x64/Release/neg001025.txt
-/x64/Release/neg001062.txt
