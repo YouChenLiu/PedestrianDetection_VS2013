@@ -4,6 +4,7 @@
 *.idb
 *.obj
 Debug
+Release
 *.pdb
 *.log
 *.sdf
