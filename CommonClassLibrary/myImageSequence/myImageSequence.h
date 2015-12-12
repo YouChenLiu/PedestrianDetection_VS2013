@@ -81,7 +81,7 @@ public:
     void SetAttribute(const Attribute attrbute, char cValue);
     
     // Return a integer which is the current processing number of ImageSequence.
-    int SetSequenceNumber(void) const { return m_iFirstNumber + m_iOffest; }
+    int GetSequenceNumber(void) const { return m_iFirstNumber + m_iOffest; }
     
     // Return a string which is the current processing number of ImageSequence.
     // like "0123" if padding length is 4.
