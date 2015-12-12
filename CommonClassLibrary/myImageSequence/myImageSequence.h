@@ -1,16 +1,16 @@
+
+
 #ifndef _MY_IMAGE_SEQUENCE_H_
 #define _MY_IMAGE_SEQUENCE_H_
 
 #include <iostream>
 #include <iomanip>
-#include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-/*
-** ImageSequence is a sequence images reader/writer.
-** It can help you access image sequence by setting few parameters.
-** You can adjust the parameters by setAttribute method if the default values are not meet your environment.
-*/
+// myImageSequence is a sequence images reader/writer.
+// It can help you access image sequence by setting few parameters.
+// You can adjust the parameters by setAttribute method
+// if the default values are not meet your environment.
 class myImageSequence {
 public:
     enum class Attribute {
@@ -35,79 +35,61 @@ private:
     bool m_bIsColor;
 
 public:
-    /*
-    ** Default constructor
-    ** It usually needs to set parameters after creation.
-    */
-    myImageSequence(void) { init(); }
+    // Default constructor
+    // It usually needs to set parameters after creation.
+    myImageSequence(void) { Init(); }
     
-	/*
-	** Recommend constructor
-	** Setting the root path, prefix, file name extension and isColor.
-    ** EX : ImageSequence("C:\\Images\\", "BG-", "jpg", false).
-    ** ImageSequence will read/write C:\Images\0000.jpg, 0001.jpg, etc.
-    ** NOTE : The isColor parameter only effects when reading.
-	*/
+	// Recommend constructor
+	// Setting the root path, prefix, file name extension and isColor.
+    // EX : ImageSequence("C:\\Images\\", "BG-", "jpg", false).
+    // ImageSequence will read/write C:\Images\0000.jpg, 0001.jpg, etc.
+    // NOTE : The isColor parameter only effects when reading.
     myImageSequence(const std::string& sRootPath, const std::string& sPrefix = "", const std::string& sExtension = "bmp", bool bIsColor = true);
     
     ~myImageSequence(void) {}
     
-    /*
-    ** Reading a image by ImageSequence
-    ** It will return true if success.
-    */
-	bool readImage(cv::Mat& mImage);
+    // Reading a image by ImageSequence
+    // It will return true if success.
+	bool ReadImage(cv::Mat& mImage);
     
-    /*
-    ** Reading a image by ImageSequence
-    ** It will read a image as R value.
-    ** It's convenience when declaration a Mat.
-    ** Note : It will "not" tell you the reading operation is success or not.
-    */
-    cv::Mat readImage(void);
+    // Reading a image by ImageSequence
+    // It will read a image as R value.
+    // It's convenience when declaration a Mat.
+    // Note : It will "not" tell you the reading operation is success or not.
+    cv::Mat ReadImage(void);
     
-    /*
-    ** Reading a image by ImageSequence
-    ** Let you access images like standard input cin.
-    ** It will return true if success.
-    */
+    // Reading a image by ImageSequence
+    // Let you access images like standard input cin.
+    // It will return true if success.
     bool operator>>(cv::Mat& mImage);
     //friend bool operator>>(myImageSequence& lhs, cv::Mat& mImage) { return lhs.operator>>(mImage); }
     
-    /*
-    ** Write out a image by ImageSequence
-    ** It will write image as a image sequence by parameters you set.
-    ** It will return true if success.
-    */
-    bool writeImage(const cv::Mat& mImage);
+    // Write out a image by ImageSequence
+    // It will write image as a image sequence by parameters you set.
+    // It will return true if success.
+    bool WriteImage(const cv::Mat& mImage);
     
-    /*
-    ** Write out a image by ImageSequence
-    ** Let you save images like standard output cout.
-    ** It will return true if success.
-    */
+    // Write out a image by ImageSequence
+    // Let you save images like standard output cout.
+    // It will return true if success.
     bool operator<<(const cv::Mat& mImage);
     //friend bool operator<<(myImageSequence lhs, const cv::Mat& mImage) { return lhs.operator<<(mImage); }
     
     
-    void setAttribute(const Attribute attrbute, const std::string& sValue);
-    void setAttribute(const Attribute attrbute, int iValue);
-    void setAttribute(const Attribute attrbute, char cValue);
+    void SetAttribute(const Attribute attrbute, const std::string& sValue);
+    void SetAttribute(const Attribute attrbute, int iValue);
+    void SetAttribute(const Attribute attrbute, char cValue);
     
-    /*
-    ** Return a integer which is the current processing number of ImageSequence.
-    */
-    int getSequenceNumber(void) const { return m_iFirstNumber + m_iOffest; }
+    // Return a integer which is the current processing number of ImageSequence.
+    int SetSequenceNumber(void) const { return m_iFirstNumber + m_iOffest; }
     
-    /*
-    ** Return a string which is the current processing number of ImageSequence.
-    ** like "0123" if padding length is 4.
-    */
-    std::string getSequenceNumberString(void) const;
+    // Return a string which is the current processing number of ImageSequence.
+    // like "0123" if padding length is 4.
+    std::string GetSequenceNumberString(void) const;
 
 private:
-    void init(void);
-    std::string makePath(void);
+    void Init(void);
+    std::string MakePath(void);
 };
 
 #endif
