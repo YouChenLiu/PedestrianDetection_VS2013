@@ -22,11 +22,11 @@ int main(void) {
     
     // read the positive smaples and calculate the hog feature
     myImageSequence oPositiveReader(sRootPath + "Positive/", "", "bmp", false);
-    oPositiveReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oPositiveReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << "loading positive images" << std::endl;
     cv::Mat mPositiveSample;
     while (oPositiveReader >> mPositiveSample) {
-        std::cout << "\r" << oPositiveReader.getSequenceNumberString();
+        std::cout << "\r" << oPositiveReader.GetSequenceNumberString();
         myFeatureExtractor oExtractor(mPositiveSample, BlockSize);
         if (bHOG) {
             oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
@@ -60,7 +60,7 @@ int main(void) {
 #       else
         auto result = static_cast<int>(poSVM->predict(mSample));
         if (result != 1) {
-            std::string sPath = "Wrong/" + std::string("pos") + oPositiveReader.getSequenceNumberString() + std::string(".jpg");
+            std::string sPath = "Wrong/" + std::string("pos") + oPositiveReader.GetSequenceNumberString() + std::string(".jpg");
             cv::imwrite(sPath, mPositiveSample);
         }
 #       endif
@@ -68,7 +68,7 @@ int main(void) {
     
     //read the negative smaples and calculate the hog feature
     myImageSequence oNegativeReader(sRootPath + "Negative/", "", "bmp", false);
-    oNegativeReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oNegativeReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << std::endl << "loading negative images" << std::endl;
     cv::Mat mNegativeSample;
     vector<vector<float>> vvfNegativeFeatures;
@@ -106,7 +106,7 @@ int main(void) {
 #       else
         auto result = static_cast<int>(poSVM->predict(mSample));
         if (result != -1) {
-            std::string sPath = "Wrong/" + std::string("neg") + oNegativeReader.getSequenceNumberString() + std::string(".jpg");
+            std::string sPath = "Wrong/" + std::string("neg") + oNegativeReader.GetSequenceNumberString() + std::string(".jpg");
             cv::imwrite(sPath, mNegativeSample);
         }
 #       endif

@@ -17,8 +17,8 @@ int main(void) {
     for (int i = 0; i < 2; ++i) {
         // read the positive smaples and calculate the hog feature
         myImageSequence oPositiveReader("D:/Database/01/Negative/", "", "bmp", false);
-        oPositiveReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
-        oPositiveReader.setAttribute(myImageSequence::Attribute::FIRST_NUMBER, 0);
+        oPositiveReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+        oPositiveReader.SetAttribute(myImageSequence::Attribute::FIRST_NUMBER, 0);
 
         cv::Mat mPositiveSample;
         std::vector<std::vector<float>> vvfPositiveFeatures;

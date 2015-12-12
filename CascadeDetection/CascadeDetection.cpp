@@ -30,8 +30,8 @@ int main(void) {
 #   ifdef _SEQUENCE_
     std::string sName = "2015-1005_0900-0915/01";
         myImageSequence oReader(std::string("D:/Database/spilt/") + sName + "/", "", "bmp");
-        oReader.setAttribute(myImageSequence::Attribute::FIRST_NUMBER, 4253);
-        oReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+        oReader.SetAttribute(myImageSequence::Attribute::FIRST_NUMBER, 4253);
+        oReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
 #   else
         cv::VideoCapture oReader(1);
         if (!oReader.isOpened()) {

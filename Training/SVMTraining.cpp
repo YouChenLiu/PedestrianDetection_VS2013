@@ -10,7 +10,7 @@ int main(void) {
     
     // read the positive smaples and calculate the hog feature
     myImageSequence oPositiveReader(sRootPath + "Positive/", "", "bmp", false);
-    oPositiveReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oPositiveReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << "loading positive images" << std::endl;
     cv::Mat mPositiveSample;
     std::vector<std::vector<float>> vvfPositiveFeatures;
@@ -37,7 +37,7 @@ int main(void) {
     // read the negative smaples and calculate the hog feature
 
     myImageSequence oNegativeReader(sRootPath + "Negative/", "", "bmp", false);
-    oNegativeReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oNegativeReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << "loading negative images" << std::endl;
     cv::Mat mNegativeSample;
     std::vector<std::vector<float>> vvfNegativeFeatures;
