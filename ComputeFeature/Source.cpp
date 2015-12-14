@@ -9,15 +9,15 @@ int main(int argc, char* argv[]) {
     }
     
     std::string sImgPath = argv[1];
-    std::string sFileName = sImgPath.substr(sImgPath.rfind("\\") + 1, sImgPath.rfind(".jpg") - sImgPath.rfind("\\") - 1);
-    std::string sFilePath = sImgPath.substr(0, sImgPath.rfind("\\") + 1) + sFileName + ".txt";
+    auto SlashIndex = sImgPath.rfind("/");
+    std::string sFileName = sImgPath.substr(SlashIndex + 1, sImgPath.rfind(".") - SlashIndex - 1);
+    std::string sFilePath = sImgPath.substr(0, SlashIndex + 1) + sFileName + ".txt";
     std::ofstream oFile(sFilePath);
     cv::Mat mImg = cv::imread(sImgPath, cv::IMREAD_GRAYSCALE);
     
     cv::Size2i BlockSize(8, 8);
     myFeatureExtractor oExtractor(mImg, BlockSize);
-    oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
-    oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
+    oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITH_L2_NORM);
     int iFeatureIndex = 0;
     for (int y = 0; y < mImg.rows; y += BlockSize.height) {
         for (int x = 0; x < mImg.cols; x += BlockSize.width) {
