@@ -20,8 +20,6 @@ void myHOG::Init(void) {
 void myHOG::Normalize(std::vector<float>& vfFeature) const {
     float fNormFactor = 0.0f;
     switch (m_iType) {
-    case myHOG::Feature::HOG_WITHOUT_NORM:
-        break;
     case myHOG::Feature::HOG_WITH_L2_NORM:
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature * fFeature;
@@ -54,7 +52,7 @@ void myHOG::Describe(cv::Point2i Position, std::vector<float>& vfHogFeature) con
 }
 
 void myHOG::DescribeCell(const cv::Point2i Position, std::vector<float>& vfHogFeature) const {
-    std::vector<float> vfBins(180 / m_iInterval, 0.0);
+    std::vector<float> vfBins(180 / m_iInterval, 0.0f);
     cv::Size2i CellSize = cv::Size2i(m_BlockSize.width / 2, m_BlockSize.height / 2);
     cv::Mat mHorizontalRoi = cv::Mat(m_mHorizontalGradientImage, cv::Rect(Position, CellSize));
     cv::Mat mVerticalRoi = cv::Mat(m_mVerticalGradientImage, cv::Rect(Position, CellSize));
@@ -70,9 +68,9 @@ void myHOG::DescribeCell(const cv::Point2i Position, std::vector<float>& vfHogFe
                 fOrientation -= 180;
             }
             
-            int target = static_cast<int>(fOrientation / m_iInterval);
-            if (target >= static_cast<int>(vfBins.size())) {
-                target = static_cast<int>(vfBins.size()) - 1;
+            auto target = static_cast<size_t>(fOrientation / m_iInterval);
+            if (target == vfBins.size()) {
+                target = vfBins.size() - 1;
             }
             vfBins[target] += fMagnitude;
         }
