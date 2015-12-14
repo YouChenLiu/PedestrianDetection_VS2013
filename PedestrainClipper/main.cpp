@@ -21,7 +21,7 @@ int main(void) {
     */
     
     tinyxml2::XMLDocument oXML;
-    int i = sRootPath.length();
+    int i = static_cast<int>(sRootPath.length());
     string sXMLFileName = sRootPath + sRootPath.substr(sRootPath.length() - 3, 2) + ".xml";
     if (oXML.LoadFile(sXMLFileName.c_str()) != XMLError::XML_NO_ERROR) {
         cout << "XML File" << endl;
@@ -30,11 +30,11 @@ int main(void) {
     }
     
     myImageSequence oImageReader(sRootPath, "", "bmp", false);
-    oImageReader.setAttribute(myImageSequence::Attribute::FIRST_NUMBER, iFirstNum);
-    oImageReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oImageReader.SetAttribute(myImageSequence::Attribute::FIRST_NUMBER, iFirstNum);
+    oImageReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
 
     myImageSequence oPositiveWriter((sRootPath + string("Positive/").c_str()), "", "bmp");
-    oPositiveWriter.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oPositiveWriter.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
 
     Mat mImage;
     XMLElement* poDataSetElement = oXML.RootElement()->FirstChildElement("DataSet");
@@ -43,7 +43,7 @@ int main(void) {
     }
     
     while (oImageReader >> mImage) {
-        int iCurrentFrameNumber = oImageReader.getSequenceNumber();
+        int iCurrentFrameNumber = oImageReader.GetSequenceNumber();
         
         XMLElement* poHeaderElement = poDataSetElement->FirstChildElement("Header");
         while ((poHeaderElement != nullptr) && (poHeaderElement->IntAttribute("frameNumber") != iCurrentFrameNumber)) {
@@ -79,9 +79,9 @@ int main(void) {
     ** use random select to generate negative samples
     */
 
-    oImageReader.setAttribute(myImageSequence::Attribute::OFFSET, 0);
+    oImageReader.SetAttribute(myImageSequence::Attribute::OFFSET, 0);
     myImageSequence oNegativeWriter((sRootPath + string("Negative/")).c_str(), "", "bmp");
-    oNegativeWriter.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oNegativeWriter.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::srand(static_cast<int>(time(NULL)));
     while (oImageReader >> mImage) {
         for (int i = 0; i < iNegativeSamplesPerImage; ++i) {

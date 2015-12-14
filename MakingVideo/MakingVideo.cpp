@@ -40,14 +40,14 @@ int main(void) {
     myImageSequence oReader(sImageRootPath, sImageNamePrefix, sFilenameExtension, bIsReadingColorImage);
     cv::Mat mImage;
 
-    oReader.setAttribute(myImageSequence::Attribute::FIRST_NUMBER, iFirstSequenceNumber);
-    oReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, iPaddingLength);
-    oReader.setAttribute(myImageSequence::Attribute::PADDING_CHARACTER, cPaddingCharacter);
+    oReader.SetAttribute(myImageSequence::Attribute::FIRST_NUMBER, iFirstSequenceNumber);
+    oReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, iPaddingLength);
+    oReader.SetAttribute(myImageSequence::Attribute::PADDING_CHARACTER, cPaddingCharacter);
 
     while (oReader >> mImage) {
         // burning sequence number on result image
         if (bIsPuttingText) {
-            cv::putText(mImage, oReader.getSequenceNumberString(), cv::Point2i(30, 30), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255, 255, 255, 0));
+            cv::putText(mImage, oReader.GetSequenceNumberString(), cv::Point2i(30, 30), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255, 255, 255, 0));
         }
 
         // writing out video frame
@@ -64,7 +64,7 @@ int main(void) {
             cv::waitKey(1);
         }
 
-        if (oReader.getSequenceNumber() == iStopNumber) {
+        if (oReader.GetSequenceNumber() == iStopNumber) {
             break;
         }
     }

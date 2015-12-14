@@ -4,6 +4,7 @@
 *.idb
 *.obj
 Debug
+Release
 *.pdb
 *.log
 *.sdf
@@ -12,5 +13,6 @@ Debug
 *.lib
 *.7z
 *.sbr
-*.opensdf
 *.bsc
+*.opensdf
+*.suo

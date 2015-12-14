@@ -3,10 +3,10 @@
 std::array<std::vector<bool>, myLBP::MAX_BIT_LENGTH / 8> myLBP::m_avbUniformMap = {};
 std::array<std::vector<cv::Point2i>, myLBP::NUMBER_OF_PATTERNS> myLBP::m_SamplingPoints = {};
 
-myLBP::myLBP(const cv::Mat& mImage, Patterns Pattern, cv::Size2i blockSize) {
+myLBP::myLBP(const cv::Mat& mImage, int Pattern, cv::Size2i blockSize) {
     Init();
     m_mImage = mImage.clone();
-    m_Pattern = Pattern;
+    m_iPattern = Pattern;
     m_BlockSize = blockSize;
     SetAttributes(Pattern);
 }
@@ -38,7 +38,7 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+1, +1), Point2i(0, +1), Point2i(-1, +1), Point2i(-1, +0),
     };
     for (auto pt : Location8_1) {
-        m_SamplingPoints.at(static_cast<int>(Patterns::LBP_8_1)).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_8_1).push_back(pt);
     }
 
     std::array<Point2i, 8> Location8_2 = {
@@ -46,7 +46,7 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+2, +2), Point2i(+0, +2), Point2i(-2, +2), Point2i(-2, +0)
     };
     for (auto pt : Location8_2) {
-        m_SamplingPoints.at(static_cast<int>(Patterns::LBP_8_2)).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_8_2).push_back(pt);
     }
 
     std::array<Point2i, 16> Location16_2 = {
@@ -54,12 +54,11 @@ void myLBP::SetSamplingPoints(void) {
         Point2i(+2, +2), Point2i(+1, +2), Point2i(+0, +2), Point2i(-1, +2), Point2i(-2, +2), Point2i(-2, +1), Point2i(-2, +0), Point2i(-2, -1)
     };
     for (auto pt : Location16_2) {
-        m_SamplingPoints.at(static_cast<int>(Patterns::LBP_16_2)).push_back(pt);
+        m_SamplingPoints.at(Feature::LBP_16_2).push_back(pt);
     }
 }
 
-void myLBP::SetAttributes(Patterns Pattern) {
-    const auto iPattern = static_cast<int>(Pattern);
+void myLBP::SetAttributes(int iPattern) {
     m_bIsUniform = ((iPattern >= myLBP::NUMBER_OF_PATTERNS) ? true : false);
     m_iRadius = ((iPattern % myLBP::NUMBER_OF_PATTERNS == 0) ? 1 : 2);
     m_iLength = ((iPattern % myLBP::NUMBER_OF_PATTERNS == 2) ? 16 : 8);
@@ -98,7 +97,7 @@ unsigned int myLBP::GetBinNumber(cv::Point2i Position) const {
     unsigned int iBinNumber = 0;
 
     const auto cCenterIntensity = m_mImage.at<unsigned char>(Position);
-    const auto& SampleingPoints = m_SamplingPoints.at(static_cast<int>(m_Pattern) % myLBP::NUMBER_OF_PATTERNS);
+    const auto& SampleingPoints = m_SamplingPoints.at(static_cast<int>(m_iPattern) % myLBP::NUMBER_OF_PATTERNS);
     for (auto pt : SampleingPoints) {
         auto CurrentPosition = Position + pt;
         if (CurrentPosition.x < 0 || CurrentPosition.y < 0 || CurrentPosition.x >= (m_mImage.cols - 1) || CurrentPosition.y >= (m_mImage.rows)) {

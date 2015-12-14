@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <memory>
 #include "myHOG/myHOG.h"
 #include "myLBP/myLBP.h"
 
@@ -13,22 +12,11 @@
 
 class myFeatureExtractor {
 public:
-    enum class Mode {
-        HOG_FEATURE = 0,
-        LBP_FEATURE,
-        LBP_8_1,
-        LBP_8_2,
-        LBP_16_2,
-        LBP_8_1_UNIFORM,
-        LBP_8_2_UNIFORM,
-        LBP_16_2_UNIFORM
-    };
-
+    class Features : public myHOG::Feature, public myLBP::Feature {};
 private:
     cv::Size2i m_BlockSize;
     cv::Mat m_mImage;
-    std::unique_ptr<myHOG> m_poHOG;
-    std::unique_ptr<myLBP> m_poLBP;
+    std::vector<myExtractorBase*> m_vpoUsedExtractor;
 
 public:
     myFeatureExtractor(cv::Mat& mImage, cv::Size2i BlockSize = cv::Size2i(20, 20));
@@ -38,7 +26,7 @@ public:
     void Describe(cv::Point2i Position, std::vector<float>& vfFeature) const;
     void Describe(int x, int y, std::vector<float>& vfFeature) const { Describe(cv::Point2i(x, y), vfFeature); }
     
-    void EnableFeature(Mode mode);
+    void EnableFeature(int iFeature);
     void SetBlockSize(cv::Size2i Size) { m_BlockSize = Size; }
     void SetBlockSize(int Width, int Height) { SetBlockSize(cv::Size2i(Width, Height)); }
 

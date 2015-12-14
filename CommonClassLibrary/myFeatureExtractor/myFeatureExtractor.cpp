@@ -12,33 +12,31 @@ myFeatureExtractor::myFeatureExtractor(cv::Mat& mImage, cv::Size2i BlockSize) {
     m_BlockSize = BlockSize;
 }
 
-myFeatureExtractor::~myFeatureExtractor(void) {}
+myFeatureExtractor::~myFeatureExtractor(void) {
+    for (auto p : m_vpoUsedExtractor) {
+        delete p;
+    }
+}
 
 void myFeatureExtractor::Init(void) {
     m_BlockSize = cv::Size2i(0, 0);
     m_mImage = cv::Mat();
-    m_poHOG = nullptr;
-    m_poLBP = nullptr;
 }
 
 void myFeatureExtractor::Describe(cv::Point2i Position, std::vector<float>& vfFeature) const {
     using namespace std;
     vfFeature.clear();
     
-    vector<float> vfHOGFeature;
-    if (m_poHOG != nullptr) {
-        m_poHOG->Describe(Position, vfHOGFeature);
-    }
-    for (auto feature : vfHOGFeature) {
-        vfFeature.push_back(feature);
-    }
-    
-    vector<float> vfLBPFeature;
-    if (m_poLBP != nullptr) {
-        m_poLBP->Describe(Position, vfLBPFeature);
-    }
-    for (auto feature : vfLBPFeature) {
-        vfFeature.push_back(feature);
+    for (auto pExtractor : m_vpoUsedExtractor) {
+        std::vector<float> vfTemp;
+        if (auto extractor = dynamic_cast<myHOG*>(pExtractor)) {
+            extractor->Describe(Position, vfTemp);
+        } else if (auto extractor = dynamic_cast<myLBP*>(pExtractor)) {
+            extractor->Describe(Position, vfTemp);
+        }
+        for (auto f : vfTemp) {
+            vfFeature.push_back(f);
+        }
     }
 
 #   ifndef NDEBUG
@@ -59,33 +57,16 @@ void myFeatureExtractor::Describe(cv::Point2i Position, std::vector<float>& vfFe
 #   endif
 }
 
-void myFeatureExtractor::EnableFeature(Mode mode) {
-    using namespace std;
-    switch (mode) {
-    case Mode::HOG_FEATURE:
-        m_poHOG = make_unique<myHOG>(myHOG(m_mImage, m_BlockSize));
+void myFeatureExtractor::EnableFeature(int iFeature) {
+    switch (iFeature / 10) {
+    case 0: // LBP feature 0 <= iFeature <= 5
+        m_vpoUsedExtractor.push_back(new myLBP(m_mImage, iFeature, m_BlockSize));
         break;
-    case Mode::LBP_8_1:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_1, m_BlockSize));
-        break;
-    case Mode::LBP_FEATURE:
-    case Mode::LBP_8_1_UNIFORM:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_1_UNIFORM, m_BlockSize));
-        break;
-    case Mode::LBP_8_2:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_2, m_BlockSize));
-        break;
-    case Mode::LBP_8_2_UNIFORM:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_8_2_UNIFORM, m_BlockSize));
-        break;
-    case Mode::LBP_16_2:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_16_2, m_BlockSize));
-        break;
-    case Mode::LBP_16_2_UNIFORM:
-        m_poLBP = make_unique<myLBP>(myLBP(m_mImage, myLBP::Patterns::LBP_16_2_UNIFORM, m_BlockSize));
+    case 1: // HOG feature 10 <= iFeature <= 14
+        m_vpoUsedExtractor.push_back(new myHOG(m_mImage, iFeature, m_BlockSize));
         break;
     default:
-        cout << "Not valid feature" << endl;
+        std::cout << "Not valid feature" << std::endl;
         break;
     }
 }

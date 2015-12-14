@@ -10,14 +10,14 @@ int main(void) {
     
     // read the positive smaples and calculate the hog feature
     myImageSequence oPositiveReader(sRootPath + "Positive/", "", "bmp", false);
-    oPositiveReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oPositiveReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << "loading positive images" << std::endl;
     cv::Mat mPositiveSample;
     std::vector<std::vector<float>> vvfPositiveFeatures;
     while (oPositiveReader >> mPositiveSample) {
         myFeatureExtractor oExtractor(mPositiveSample, BlockSize);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
         std::vector<float> vfCascadeFeature;
         for (int y = 0; y < mPositiveSample.rows / BlockSize.height; ++y) {
             for (int x = 0; x < mPositiveSample.cols / BlockSize.width; ++x) {
@@ -37,14 +37,14 @@ int main(void) {
     // read the negative smaples and calculate the hog feature
 
     myImageSequence oNegativeReader(sRootPath + "Negative/", "", "bmp", false);
-    oNegativeReader.setAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
+    oNegativeReader.SetAttribute(myImageSequence::Attribute::PADDING_LENGTH, 6);
     std::cout << "loading negative images" << std::endl;
     cv::Mat mNegativeSample;
     std::vector<std::vector<float>> vvfNegativeFeatures;
     while (oNegativeReader >> mNegativeSample) {
         myFeatureExtractor oExtractor(mNegativeSample, BlockSize);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::HOG_FEATURE);
-        oExtractor.EnableFeature(myFeatureExtractor::Mode::LBP_8_1_UNIFORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::HOG_WITHOUT_NORM);
+        oExtractor.EnableFeature(myFeatureExtractor::Features::LBP_8_1_UNIFORM);
 
         std::vector<float> vfCascadeFeature;
         for (int y = 0; y < mNegativeSample.rows / BlockSize.height; ++y) {
