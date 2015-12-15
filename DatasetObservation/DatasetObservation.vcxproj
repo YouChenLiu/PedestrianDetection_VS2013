@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F28DFA08-F645-4FDD-B770-4CFF57E6AC46}</ProjectGuid>
+    <ProjectGuid>{595F3B15-9FCB-449B-9A67-260F2F5031FA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Testing</RootNamespace>
+    <RootNamespace>DatasetObservation</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="observation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
