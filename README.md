@@ -1,4 +1,4 @@
-# PedestrianDetection
+# Pedestrian Detection
 
 It's a Visual Studio 2015 solution of my research.
 I merge some common feature in this.
