@@ -20,6 +20,15 @@ void myHOG::Init(void) {
 void myHOG::Normalize(std::vector<float>& vfFeature) const {
     float fNormFactor = 0.0f;
     switch (m_iType) {
+    case myHOG::Feature::HOG_WITH_L1_NORM:
+        for (auto fFeature : vfFeature) {
+            fNormFactor += fFeature;
+        }
+
+        for (auto& fFeature : vfFeature) {
+            fFeature = fFeature / fNormFactor * m_iMagnifyingFactor;
+        }
+        break;
     case myHOG::Feature::HOG_WITH_L2_NORM:
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature * fFeature;
@@ -27,7 +36,7 @@ void myHOG::Normalize(std::vector<float>& vfFeature) const {
         fNormFactor = cv::sqrt(fNormFactor + m_fUnimportantValue * m_fUnimportantValue);
 
         for (auto& fFeature : vfFeature) {
-            fFeature /= fNormFactor;
+            fFeature = fFeature / fNormFactor * m_iMagnifyingFactor;
         }
         break;
     default:

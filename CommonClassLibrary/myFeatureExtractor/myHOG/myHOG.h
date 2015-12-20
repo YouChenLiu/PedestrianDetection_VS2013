@@ -26,6 +26,7 @@ private:
     cv::Size2i m_BlockSize;
     int m_iType;
     const float m_fUnimportantValue = 1e-6f;
+    const int m_iMagnifyingFactor = 100;
 
 public:
     myHOG(const cv::Mat& mImage, int iType, cv::Size2i blockSize = cv::Size2i(8, 8), int iInterval = 20);
