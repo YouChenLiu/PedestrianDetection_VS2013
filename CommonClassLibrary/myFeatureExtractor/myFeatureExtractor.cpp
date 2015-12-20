@@ -27,7 +27,7 @@ void myFeatureExtractor::Describe(cv::Point2i Position, std::vector<float>& vfFe
     using namespace std;
     vfFeature.clear();
     
-    for (auto pExtractor : m_vpoUsedExtractor) {
+    for (const auto pExtractor : m_vpoUsedExtractor) {
         std::vector<float> vfTemp;
         if (auto extractor = dynamic_cast<myHOG*>(pExtractor)) {
             extractor->Describe(Position, vfTemp);
