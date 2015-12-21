@@ -21,6 +21,7 @@ void myHOG::Normalize(std::vector<float>& vfFeature) const {
     float fNormFactor = 0.0f;
     switch (m_iType) {
     case myHOG::Feature::HOG_WITH_L1_NORM:
+        fNormFactor = m_fUnimportantValue;
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature;
         }
@@ -29,11 +30,22 @@ void myHOG::Normalize(std::vector<float>& vfFeature) const {
             fFeature = fFeature / fNormFactor * m_iMagnifyingFactor;
         }
         break;
+    case myHOG::Feature::HOG_WITH_L1_SQRT:
+        fNormFactor = m_fUnimportantValue;
+        for (auto fFeature : vfFeature) {
+            fNormFactor += fFeature;
+        }
+
+        for (auto& fFeature : vfFeature) {
+            fFeature = cv::sqrt(fFeature / fNormFactor) * m_iMagnifyingFactor;
+        }
+        break;
     case myHOG::Feature::HOG_WITH_L2_NORM:
+        fNormFactor = m_fUnimportantValue * m_fUnimportantValue;
         for (auto fFeature : vfFeature) {
             fNormFactor += fFeature * fFeature;
         }
-        fNormFactor = cv::sqrt(fNormFactor + m_fUnimportantValue * m_fUnimportantValue);
+        fNormFactor = cv::sqrt(fNormFactor);
 
         for (auto& fFeature : vfFeature) {
             fFeature = fFeature / fNormFactor * m_iMagnifyingFactor;
