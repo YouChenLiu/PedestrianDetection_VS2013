@@ -1,5 +1,3 @@
-
-
 #ifndef _MY_IMAGE_SEQUENCE_H_
 #define _MY_IMAGE_SEQUENCE_H_
 
@@ -41,49 +39,48 @@ public:
     
 	// Recommend constructor
 	// Setting the root path, prefix, file name extension and isColor.
-    // EX : ImageSequence("C:\\Images\\", "BG-", "jpg", false).
-    // ImageSequence will read/write C:\Images\0000.jpg, 0001.jpg, etc.
+    // EX : myImageSequence("C:/Images/", "BG-", "jpg", false).
+    // myImageSequence will read/write C:\Images\0000.jpg, 0001.jpg, etc.
     // NOTE : The isColor parameter only effects when reading.
     myImageSequence(const std::string& sRootPath, const std::string& sPrefix = "", const std::string& sExtension = "bmp", bool bIsColor = true);
     
     ~myImageSequence(void) {}
     
-    // Reading a image by ImageSequence
+    // Reading a image by myImageSequence
     // It will return true if success.
 	bool ReadImage(cv::Mat& mImage);
     
-    // Reading a image by ImageSequence
+    // Reading a image by myImageSequence
     // It will read a image as R value.
     // It's convenience when declaration a Mat.
     // Note : It will "not" tell you the reading operation is success or not.
     cv::Mat ReadImage(void);
     
-    // Reading a image by ImageSequence
+    // Reading a image by myImageSequence
     // Let you access images like standard input cin.
     // It will return true if success.
     bool operator>>(cv::Mat& mImage);
     //friend bool operator>>(myImageSequence& lhs, cv::Mat& mImage) { return lhs.operator>>(mImage); }
     
-    // Write out a image by ImageSequence
+    // Write out a image by myImageSequence
     // It will write image as a image sequence by parameters you set.
     // It will return true if success.
     bool WriteImage(const cv::Mat& mImage);
     
-    // Write out a image by ImageSequence
+    // Write out a image by myImageSequence
     // Let you save images like standard output cout.
     // It will return true if success.
     bool operator<<(const cv::Mat& mImage);
-    //friend bool operator<<(myImageSequence lhs, const cv::Mat& mImage) { return lhs.operator<<(mImage); }
+    // friend bool operator<<(myImageSequence lhs, const cv::Mat& mImage) { return lhs.operator<<(mImage); }
     
+    // This method provides the ability that can modify the parameter when running
+    template <typename T>
+    void SetAttribute(const Attribute attrbute, T value);
     
-    void SetAttribute(const Attribute attrbute, const std::string& sValue);
-    void SetAttribute(const Attribute attrbute, int iValue);
-    void SetAttribute(const Attribute attrbute, char cValue);
-    
-    // Return a integer which is the current processing number of ImageSequence.
+    // Return a integer which is the current processing number of myImageSequence.
     int GetSequenceNumber(void) const { return m_iFirstNumber + m_iOffest; }
     
-    // Return a string which is the current processing number of ImageSequence.
+    // Return a string which is the current processing number of myImageSequence.
     // like "0123" if padding length is 4.
     std::string GetSequenceNumberString(void) const;
 

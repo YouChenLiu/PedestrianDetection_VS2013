@@ -51,7 +51,8 @@ bool myImageSequence::operator<<(const cv::Mat& mImage) {
     return cv::imwrite(sPath, mImage);
 }
 
-void myImageSequence::SetAttribute(const Attribute attrbute, const std::string& sValue) {
+template <>
+void myImageSequence::SetAttribute(const Attribute attrbute, const char* sValue) {
     switch (attrbute) {
     case Attribute::EXTENSION:
         m_sExtension = sValue;
@@ -68,6 +69,7 @@ void myImageSequence::SetAttribute(const Attribute attrbute, const std::string& 
     }
 }
 
+template <>
 void myImageSequence::SetAttribute(const Attribute attrbute, int iValue) {
     switch (attrbute) {
     case Attribute::FIRST_NUMBER:
@@ -78,13 +80,14 @@ void myImageSequence::SetAttribute(const Attribute attrbute, int iValue) {
         break;
     case Attribute::OFFSET:
         m_iOffest = iValue;
-		break;
+        break;
     default:
         std::cout << "ImageSequence::Error occur when setting integer attribute" << std::endl;
         break;
     }
 }
 
+template <>
 void myImageSequence::SetAttribute(const Attribute attrbute, char cValue) {
     switch (attrbute) {
     case Attribute::PADDING_CHARACTER:
@@ -92,6 +95,18 @@ void myImageSequence::SetAttribute(const Attribute attrbute, char cValue) {
         break;
     default:
         std::cout << "ImageSequence::Error occur when setting character attribute" << std::endl;
+        break;
+    }
+}
+
+template <>
+void myImageSequence::SetAttribute(const Attribute attrbute, bool bValue) {
+    switch (attrbute) {
+    case Attribute::IS_COLOR:
+        m_bIsColor = bValue;
+        break;
+    default:
+        std::cout << "ImageSequence::Error occur when setting boolean attribute" << std::endl;
         break;
     }
 }
