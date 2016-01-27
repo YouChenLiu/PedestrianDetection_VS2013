@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PedestrainClipper", "PedestrainClipper\PedestrainClipper.vcxproj", "{955ED0E9-F5BF-4C91-B18B-1BE27DF299BB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -91,6 +91,7 @@ Global
 		{E2948A02-6D0E-46EF-9FB3-EB7EBE00ECF4}.Release|Win32.ActiveCfg = Release|Win32
 		{E2948A02-6D0E-46EF-9FB3-EB7EBE00ECF4}.Release|Win32.Build.0 = Release|Win32
 		{E2948A02-6D0E-46EF-9FB3-EB7EBE00ECF4}.Release|x64.ActiveCfg = Release|x64
+		{E2948A02-6D0E-46EF-9FB3-EB7EBE00ECF4}.Release|x64.Build.0 = Release|x64
 		{E2948A02-6D0E-46EF-9FB3-EB7EBE00ECF4}.Release|x64.Deploy.0 = Release|x64
 		{6BF9A473-D4D2-4080-B3BF-788031DA416C}.Debug|ARM.ActiveCfg = Debug|Win32
 		{6BF9A473-D4D2-4080-B3BF-788031DA416C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
@@ -163,7 +164,6 @@ Global
 		{595F3B15-9FCB-449B-9A67-260F2F5031FA}.Release|Win32.ActiveCfg = Release|Win32
 		{595F3B15-9FCB-449B-9A67-260F2F5031FA}.Release|Win32.Build.0 = Release|Win32
 		{595F3B15-9FCB-449B-9A67-260F2F5031FA}.Release|x64.ActiveCfg = Release|x64
-		{595F3B15-9FCB-449B-9A67-260F2F5031FA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
